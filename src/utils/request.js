@@ -2,7 +2,7 @@ import axios from 'axios'
 // 导入axios
 import qs from 'qs';//-S
 // qs把对象转换为url编码形式
-const BASEURL = process.env.NODE_ENV==='production'?'https://www.520mg.com/':'http://localhost:8081';
+const BASEURL = process.env.NODE_ENV==='production'?'https://www.520mg.com/':'http://localhost:8080';
 // process.env.NODE_ENV 当前的运行环境是production
 // process 处理 env环境 node NodeJS  env 环境
 // 当前的运行环境如果是线上 就业采用域名 https://www.520mg.com 作为所有请求的默认域名，如果开发环境则设置另外一个  

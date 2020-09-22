@@ -2,7 +2,7 @@
 	<div class="login">
 		<div class="login-box">
 			<template>
-				<el-carousel height="720px" direction="vertical" :autoplay="true" :loop="true" :interval="3000">
+				<el-carousel height="720px" :autoplay="true" :loop="true" :interval="6000">
 					<el-carousel-item><img src="../../../assets/img/1.jpg" alt="" width="100%" height="800" /></el-carousel-item>
 					<el-carousel-item><img src="../../../assets/img/2.jpg" alt="" width="100%" height="800" /></el-carousel-item>
 					<el-carousel-item><img src="../../../assets/img/3.jpg" alt="" width="100%" height="800" /></el-carousel-item>
@@ -11,9 +11,9 @@
 			</template>
 
 			<div class="loginsuc">
-				<div class="title">
-					<h3>登陆</h3>
-					<span>欢迎使用软件</span>
+				<div class="titleone">
+					<h3>登录</h3>
+					<span>欢迎使用悦朋软件</span>
 				</div>
 				<div><el-input prefix-icon="el-icon-s-custom" placeholder="请输入用户名" clearable v-model="name"></el-input></div>
 				<div><el-input prefix-icon="el-icon-lock" placeholder="请输入密码" show-password v-model="pwd"></el-input></div>
@@ -26,7 +26,7 @@
 					<span @click="getcode()">{{ mockcode }}</span>
 				</div>
 
-				<div><el-button type="primary" @click="login()">登陆</el-button></div>
+				<div><el-button type="primary" @click="login()">登录</el-button></div>
 			</div>
 		</div>
 	</div>
@@ -147,6 +147,20 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
+.loginsuc .titleone{
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.loginsuc .titleone span{
+	font-size: 12px;
+	margin-top: 10px;
+	margin-left: 5px;
+	color: #A9A9A9;
+}
+.loginsuc .titleone h3{
+	color: #0000ff;
+}
 .loginsuc .title h3 {
 	color: #0000ff;
 	margin-right: 10px;
@@ -154,6 +168,7 @@ export default {
 .loginsuc .title span {
 	font-size: 12px;
 	margin-top: 10px;
+	color: #A9A9A9;
 }
 .loginsuc div {
 	margin-top: 5px;
@@ -176,4 +191,19 @@ export default {
 	line-height: 35px;
 	background-color: darkgray;
 }
+.login-box .el-carousel__indicators--horizontal{
+	top: 600px;
+	left: 30%!important;
+}
+.login-box .el-carousel__button{
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+}
+.login-box .is-active .el-carousel__button{
+	width: 30px;
+	border-radius: 10px;
+	
+}
+
 </style>

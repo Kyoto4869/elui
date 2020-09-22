@@ -5,7 +5,6 @@
 			<el-aside width="200px" class="asside">
 				<div class="title"><h1>管理系统</h1></div>
 
-				
 				<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
 					<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
 						<el-radio-button :label="false">展开</el-radio-button>
@@ -58,14 +57,16 @@
 </template>
 
 <script>
+import {getcode} from '../../api/index.js'
 export default {
 	data() {
 		return {
 			isCollapse: true,
-			loginsucid:sessionStorage.getItem('token'),//登陆成功标准
-			
-			
+			loginsucid: sessionStorage.getItem('token') //登陆成功标准
 		};
+	},
+	created() {
+		this.test()
 	},
 	methods: {
 		handleOpen(key, keyPath) {
@@ -73,6 +74,12 @@ export default {
 		},
 		handleClose(key, keyPath) {
 			console.log(key, keyPath);
+		},
+		/* test */
+		test() {
+			getcode().then(res => {
+				console.log(res.data, 'test');
+			});
 		}
 	}
 };
