@@ -17,7 +17,7 @@
 				</div>
 				<div><el-input prefix-icon="el-icon-s-custom" placeholder="请输入用户名" clearable v-model="name"></el-input></div>
 				<div><el-input prefix-icon="el-icon-lock" placeholder="请输入密码" show-password v-model="pwd"></el-input></div>
-				<div  class="title">
+				<div class="title">
 					<span>立即注册</span>
 					<span>忘记密码？</span>
 				</div>
@@ -35,32 +35,34 @@
 <script>
 /* 导入封装的axios */
 import request from '@/utils/request.js';
+import { getcode } from '../../../api/index.js';
 export default {
 	data() {
 		return {
 			bgimgsrc: [], //背景图片
-			name: '',//输入的用户名
-			pwd: '',//输入的密码
-			code: '',//输入的验证码
-			userInfo: {} ,//用户信息
-			mockcode:'',//mock获取的验证密
-
+			name: '', //输入的用户名
+			pwd: '', //输入的密码
+			code: '', //输入的验证码
+			userInfo: {}, //用户信息
+			mockcode: '' //mock获取的验证密
 		};
 	},
 	created() {
 		this.getUserInfo();
-		this.getcode()
+		this.getcode();
 	},
 	methods: {
-
-		getcode(){
+		getcode() {
 			/**
 			 * 获取随机生成的验证码
-			   * */
-			this.$http.get('usercode').then(res=>{
-                  this.mockcode=res.data.score;
-			}).catch(err => {console.log(err)})
-
+			 * */
+			getcode()
+				.then(res => {
+					this.mockcode = res.data.score;
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		},
 		getUserInfo() {
 			// 通过get 去获取用户信息
@@ -78,37 +80,31 @@ export default {
 			 *
 			 */
 			// 根据接口，url，data参数，header
-			if(this.code==this.mockcode){//判断验证码是否正确
-                this.code="";
-             request
-             	.postURL('/member/index_login2.php', { userid: this.name, pwd: this.pwd, fmdo: 'login', dopost: 'login' })
-             	.then(res => {
-             		if (res.data.status) {
+			if (this.code == this.mockcode) {
+				//判断验证码是否正确
+				this.code = '';
+				request
+					.postURL('/member/index_login2.php', { userid: this.name, pwd: this.pwd, fmdo: 'login', dopost: 'login' })
+					.then(res => {
+						if (res.data.status) {
+							//如果status为1 成功
+							var that = this; // 保存个this
+							sessionStorage.setItem('token', res.data.token);
+							console.log('登陆成功');
 
-             			//如果status为1 成功
-             			var that = this; // 保存个this
-             			sessionStorage.setItem('token', res.data.token);
-             			console.log("登陆成功")
-						
-						this.$router.push('/user')
-						
-						
-             		} else {
-
-             			console.log("失败")
-             			// 提示登录失败信息
-             		}
-             	})
-             	.catch(err => {console.log(err)});
-
-
-			}else{
-				alert("验证码错误");
-				 this.code="";
+							this.$router.push('/user');
+						} else {
+							console.log('失败');
+							// 提示登录失败信息
+						}
+					})
+					.catch(err => {
+						console.log(err);
+					});
+			} else {
+				alert('验证码错误');
+				this.code = '';
 			}
-
-
-
 		}
 	}
 };
@@ -147,18 +143,18 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
-.loginsuc .titleone{
+.loginsuc .titleone {
 	display: flex;
 	align-items: center;
 	margin-bottom: 20px;
 }
-.loginsuc .titleone span{
+.loginsuc .titleone span {
 	font-size: 12px;
 	margin-top: 10px;
 	margin-left: 5px;
-	color: #A9A9A9;
+	color: #a9a9a9;
 }
-.loginsuc .titleone h3{
+.loginsuc .titleone h3 {
 	color: #0000ff;
 }
 .loginsuc .title h3 {
@@ -168,7 +164,7 @@ export default {
 .loginsuc .title span {
 	font-size: 12px;
 	margin-top: 10px;
-	color: #A9A9A9;
+	color: #a9a9a9;
 }
 .loginsuc div {
 	margin-top: 5px;
@@ -191,19 +187,17 @@ export default {
 	line-height: 35px;
 	background-color: darkgray;
 }
-.login-box .el-carousel__indicators--horizontal{
+.login-box .el-carousel__indicators--horizontal {
 	top: 600px;
-	left: 30%!important;
+	left: 30% !important;
 }
-.login-box .el-carousel__button{
+.login-box .el-carousel__button {
 	width: 12px;
 	height: 12px;
 	border-radius: 100%;
 }
-.login-box .is-active .el-carousel__button{
+.login-box .is-active .el-carousel__button {
 	width: 30px;
 	border-radius: 10px;
-	
 }
-
 </style>
