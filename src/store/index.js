@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+	  
+	  Adminid:sessionStorage.getItem('token'),//判断是否登录
+	  
+	  
   },
   mutations: {
   },

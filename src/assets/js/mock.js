@@ -113,3 +113,90 @@ Mock.mock('shop', {
 
 
 })
+
+
+/* 首页数据 */
+
+Mock.mock('admin', {
+
+	msg: "succees",
+	status: 0,
+	/* 产生头部数据 */
+	listtop: [{
+			imgsrc: "@image('60x60')",
+			title: '待接收货订单',
+			"count|0-10000": 10000,
+		},
+		{
+			imgsrc: "@image('60x60')",
+			title: '待处理退款',
+			"count|0-10000": 10000,
+		},
+		{
+			imgsrc: "@image('60x60')",
+			title: '待接收货订单',
+			"count|0-10000": 10000,
+		},
+		{
+			imgsrc: "@image('60x60')",
+			title: '待处理退款',
+			"count|0-10000": 10000,
+		},
+	],
+	listcont: [{
+			imgsrc: require('../../assets/img/首页1.png'),
+			"count|0-10000": 10000,
+		},
+		{
+			imgsrc: require('../../assets/img/首页2.png'),
+			"count|5000-100000": 10000,
+		}, {
+			imgsrc: require('../../assets/img/首页3.png'),
+			"count|0-10000": 10000,
+		}, {
+			imgsrc: require('../../assets/img/首页4.png'),
+			"count|0-10000": 10000,
+		},
+	],
+	listbtn1: [{
+			title: '已下架',
+			"count|0-5000": 5000,
+		},
+		{
+			title: '已上架',
+			"count|5000-50000": 50000,
+		},
+		{
+			title: '活动商品',
+			"count|0-500": 500,
+		},
+		{
+			title: '全部商品',
+			"count|1000-199999": 99999,
+		},
+	],
+	listbtn2: [{
+			title: '今日新增',
+			"count|20-500": 500,
+		},
+		{
+			title: '昨日新增',
+			"count|50-500": 500,
+		},
+		{
+			title: '本月新增',
+			"count|0-5000": 5000,
+		},
+		{
+			title: '用户天数',
+			"count|10-199": 99,
+		},
+	]
+
+
+
+
+
+
+
+})

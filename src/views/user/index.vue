@@ -1,8 +1,8 @@
 <template>
-	<div class="user-index" v-if="loginsucid">
+	<div class="user-index" v-if="$store.state.Adminid!=null?true:$router.push('/login')">
 		<el-container class="full">
 			<!-- 侧边栏 -->
-			<el-aside :width="wei" class="asside" >
+			<el-aside :width="wei" class="asside">
 				<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
 					<div class="title" style="margin-top: 20px; margin-bottom: 20px;margin-left: 5px; transition: ease 3s;" v-if="!isCollapse">
 						<span style="color: #1b2e80; font-size: 24px;">悦朋</span>
@@ -27,7 +27,7 @@
 					<!--  -->
 					<el-menu-item index="0">
 						<i class="el-icon-s-home"></i>
-						<span slot="title">首页</span>
+						<span slot="title" @click="addTab(editableTabsValue, '首页', '/user/admin')"><router-link to="/user/admin" class="a-color">首页</router-link></span>
 					</el-menu-item>
 					<!--  -->
 					<el-submenu index="1">
@@ -38,7 +38,11 @@
 
 						<el-submenu index="1-1">
 							<span slot="title">商品管理</span>
-							<el-menu-item index="1-1-1">选项1</el-menu-item>
+							<el-menu-item index="1-1-1">
+								<!-- <span slot="title" @click="addTab(editableTabsValue, '发布商品', '/user/releasecom')">
+									<router-link to="/user/releasecom" class="a-color">发布商品</router-link>
+								</span> -->
+							</el-menu-item>
 						</el-submenu>
 
 						<el-submenu index="1-2">
@@ -68,18 +72,29 @@
 						</template>
 						<el-menu-item index="4-1">
 							<!-- 添加tab标签，然后继续路由 -->
-							<span slot="title" @click="addTab(editableTabsValue, '门店管理', '/user/shop')"><router-link to="/user/shop" class="a-color">门店管理</router-link></span>
+							<span slot="title" @click="addTab(editableTabsValue, '门店管理', '/user/shop')">
+								<router-link to="/user/shop" class="a-color">门店管理</router-link>
+							</span>
 						</el-menu-item>
 					</el-submenu>
 					<!--  -->
+				
 					<el-submenu index="5">
 						<template slot="title">
-							<i class="el-icon-edit"></i>
+							<i class="el-icon-s-shop"></i>
 							<span slot="title">营销</span>
 						</template>
-						<el-menu-item index="5-1"><span slot="title" @click="addTab(editableTabsValue, '门店管理22', '/user')">门店管理</span></el-menu-item>
+						<el-menu-item index="6-1">
+							<!-- 添加tab标签，然后继续路由 -->
+							<span slot="title" @click="addTab(editableTabsValue, '发布商品', '/user/releasecom')">
+								<router-link to="/user/releasecom" class="a-color">创建活动</router-link>
+							</span>
+						</el-menu-item>
 					</el-submenu>
-
+					
+					
+					
+					
 					<!--  -->
 				</el-menu>
 			</el-aside>
@@ -89,16 +104,26 @@
 				<!-- 头部-->
 				<el-header class="headers">
 					<div class="hearder-cont">
-						<i class="el-icon-message-solid" style="color: #0000FF;"></i>
-						<span>
-							退出登录
-							<i class="el-icon-s-release" style="color: #0000FF;"></i>
-						</span>
+						<i class="el-icon-message-solid" style="color: #0000FF;font-size: 24px;margin-right: 10px;"></i>
+						 <el-avatar style="margin-right: 10px;"> user </el-avatar>
+						 <div @click="exit()">
+							 <span >
+							 	退出登录
+							 </span>
+							 <i class="iconfont icon-sign-out" style="color: #0000FF;font-size: 32px;margin-right: 10px;"></i>
+						 </div>
+						
 					</div>
 				</el-header>
 
-				<el-tabs v-model="editableTabsValue" type="card"  @tab-remove="removeTab" @tab-click="tabClick">
-					<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name" :closable="item.name=='1'?false:true"></el-tab-pane>
+				<el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" @tab-click="tabClick">
+					<el-tab-pane
+						v-for="(item, index) in editableTabs"
+						:key="item.name"
+						:label="item.title"
+						:name="item.name"
+						:closable="item.name == '1' ? false : true"
+					></el-tab-pane>
 				</el-tabs>
 				<!-- 内容 -->
 				<el-main class="con"><router-view></router-view></el-main>
@@ -111,12 +136,12 @@
 </template>
 
 <script>
-import { getcode } from '../../api/index.js';
+import { getcode,Exit} from '../../api/index.js';
 export default {
 	data() {
 		return {
 			isCollapse: false,
-			loginsucid: sessionStorage.getItem('token'), //登陆成功标准
+			// loginsucid: sessionStorage.getItem('token'), //登陆成功标准
 			wei: '200px',
 			/* 标签页 */
 			editableTabsValue: '2',
@@ -124,7 +149,7 @@ export default {
 				{
 					title: '首页',
 					name: '1',
-					content: '/user'
+					content: '/user/admin'
 				}
 			],
 			tabIndex: 1
@@ -164,7 +189,7 @@ export default {
 			this.editableTabsValue = activeName;
 			this.editableTabs = tabs.filter(tab => tab.name !== targetName);
 			/* 删除后都会转向首页*/
-			this.$router.push('/user');
+			this.$router.push('/user/admin');
 		},
 		/* 添加标签页 */
 		addTab(targetName, title, content) {
@@ -185,13 +210,30 @@ export default {
 					this.$router.push(i.content);
 				}
 			}
+		},
+		exit(){
+			/* 退出登录 */
+			Exit({dopost:'exit'})
+			.then(res=>{
+				if(res.data.status){ //如果status为1
+				sessionStorage.removeItem("token") //删除token
+		
+			    this.$notify({ type: 'success', message: '退出成功' });
+					// 提示用户退出成功
+					
+					
+				this.$router.push('/login')
+				}
+			})
+			.catch(err=>console.log(err))
+			
 		}
 	}
 };
 </script>
 
 <style>
-.user-index .a-color{
+.user-index .a-color {
 	color: #000;
 }
 .user-index .full {
@@ -224,6 +266,8 @@ export default {
 }
 .headers .hearder-cont {
 	float: right;
+	display: flex;
+	align-items: center;
 }
 .user-index .el-tabs__item {
 	margin-right: 10px;

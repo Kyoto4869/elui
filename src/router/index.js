@@ -4,8 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/user/admin/login.vue'
 import User from '../views/user/index.vue'
 import Shop from '../views/shop/index.vue'
-
-
+import Admin from '../views/user/admin/index.vue'
+import ReleaseCom from '../views/merchandise/releaseCom.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,10 +39,24 @@ const routes = [
 		name: 'User',
 		component: User,
 		children:[
-			{
+			{   
+				/* 商店页面 */
 				path:'shop',
+				name:"Shop",
 				component:Shop
-			}
+			},
+			{   
+				/* 首页 */
+				path:'admin',
+				component:Admin,
+				name:'Admin'
+			},
+			{
+				/* 发布商品 */
+				path:'releasecom',
+				component:ReleaseCom,
+				name:'ReleaseCom'
+			},
 			
 			
 			

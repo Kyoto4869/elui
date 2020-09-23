@@ -7,6 +7,7 @@ import './assets/js/mock.js'
 import './assets/css/reset.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import './icon/iconfont.css'
 Vue.use(ElementUI);
 
 

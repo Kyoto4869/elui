@@ -51,6 +51,7 @@ export default {
 		this.getUserInfo();
 		this.getcode();
 	},
+	
 	methods: {
 		getcode() {
 			/**
@@ -89,10 +90,18 @@ export default {
 						if (res.data.status) {
 							//如果status为1 成功
 							var that = this; // 保存个this
+							console.log(sessionStorage.getItem("token"),"111")
 							sessionStorage.setItem('token', res.data.token);
+							this.$store.state.Adminid=sessionStorage.getItem("token");
+							this.$notify({
+								title: '成功',
+								message: '登录成功',
+								type: 'success',
+							});
+
 							console.log('登陆成功');
 
-							this.$router.push('/user');
+							this.$router.push('/user/admin');
 						} else {
 							console.log('失败');
 							// 提示登录失败信息

@@ -1,0 +1,47 @@
+
+/* 活动信息 */
+.releasecom .step{
+	margin-left: 400px;
+
+}
+
+.releasecom .information{
+	margin-left: 300px;
+}
+.releasecom .information>div{
+	margin-left: 100px;
+}
+.releasecom .admin>p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 2px;
+	border-left: 5px solid #3f78f6;
+}
+
+.releasecom .information .el-input {
+	width: 350px;
+	height: 50px;
+}
+
+.releasecom .information .box{
+	margin-bottom:5px;
+}
+.releasecom .information .box-cont .el-input{
+	width: 200px;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 50px;
+}
+.releasecom .information .boxks{
+	margin-left: 500px;
+	margin-top: -50px;
+	
+}
+
+.releasecom .information .el-input__inner{
+	height: 30px;
+}
+.releasecom .information .el-input__icon{
+	height: 10%;
+	line-height: 30px;
+}
