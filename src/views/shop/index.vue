@@ -29,7 +29,7 @@
 			<div class="about">
 				<!-- 表单 -->
 				<template>
-					<el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+					<el-table ref="multipleTable" :data="tableDataPage" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 						<el-table-column type="selection" width="55"></el-table-column>
 
 						<el-table-column prop="name" label="店名" width="120"></el-table-column>
@@ -71,7 +71,7 @@
 						@size-change="handleSizeChange"
 						@current-change="handleCurrentChange"
 						:current-page.sync="currentPage"
-						:page-size="4"
+						:page-size="pageSize"
 						layout="total, prev, pager, next"
 						:total="total"
 					></el-pagination>
@@ -87,11 +87,12 @@ import { getshop } from '../../api/index.js';
 export default {
 	data() {
 		return {
-			tableData: [],
+			tableData: [],//全部数据
 			multipleSelection: [],
-			currentPage: 1,//换页的开始页面
-			tableDataPage: [],
+			currentPage: 1,//换页的开始页面,与对应的页面
+			tableDataPage: [],//页的数据
 			total:0,//总条数
+			pageSize:8,//每页条数
 			
 		};
 	},
@@ -117,10 +118,12 @@ export default {
 			console.log(`每页 ${val} 条`);
 		},
 		handleCurrentChange(val) {
-			
-			
 			console.log(`当前页: ${val}`);
+			console.log(this.tableData)
 			
+			let start=(val-1)*this.pageSize;
+			let end=val*this.pageSize;
+			this.tableDataPage=this.tableData.slice(start,end)
 			
 			
 			
@@ -137,14 +140,23 @@ export default {
 					// console.log(res.data.list);
 					
 					this.total=this.tableData.length;//计算有多少个数据
+					
+					this.tableDataPage=this.tableData.slice(0,this.pageSize)
 				})
 				.catch(err => {
 					console.log(err);
 				});
 		},
-		handleDel(index, row) {
+		handleDel(index,row) {
 			/* 删除事件shop的数据 */
-			this.tableData.splice(index, 1);
+			console.log(index)
+			this.tableDataPage.splice(index, 1);//删除单个页面的数据
+			/*  */
+			
+			let count=((this.currentPage-1)*this.pageSize)+index;
+			this.tableData.splice(count,1);//删除总的数据shop
+			
+			
 		}
 	}
 };
