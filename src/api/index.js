@@ -29,3 +29,12 @@ export const getcode = () => {
 			.catch(err => reject(err))
 	})
 }
+
+
+export const getshop = () => {
+	return new Promise((resolve, reject) => {
+	         axios.get('shop')
+			.then(res => resolve(res))
+			.catch(err => reject(err))
+	})
+}

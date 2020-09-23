@@ -2,72 +2,135 @@
 	<div class="user-index" v-if="loginsucid">
 		<el-container class="full">
 			<!-- 侧边栏 -->
-			<el-aside width="200px" class="asside">
-				<div class="title"><h1>管理系统</h1></div>
-
+			<el-aside :width="wei" class="asside" >
 				<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-					<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-						<el-radio-button :label="false">展开</el-radio-button>
-						<el-radio-button :label="true">收起</el-radio-button>
-					</el-radio-group>
+					<div class="title" style="margin-top: 20px; margin-bottom: 20px;margin-left: 5px; transition: ease 3s;" v-if="!isCollapse">
+						<span style="color: #1b2e80; font-size: 24px;">悦朋</span>
+						<span style="color: #4a7ff6;">管理系统(mvp版)</span>
+					</div>
+
+					<div v-if="isCollapse" class="title" style="margin-top: 20px; margin-bottom: 20px;margin-left: 5px;transition: ease 3s;">
+						<span style="color: #1b2e80; font-size: 20px;">悦朋</span>
+					</div>
+
+					<el-menu-item
+						index="100"
+						@click="
+							isCollapse = !isCollapse;
+							changecollapse();
+						"
+					>
+						<i class="el-icon-s-fold"></i>
+						<span slot="title">收起</span>
+					</el-menu-item>
+
+					<!--  -->
+					<el-menu-item index="0">
+						<i class="el-icon-s-home"></i>
+						<span slot="title">首页</span>
+					</el-menu-item>
+					<!--  -->
 					<el-submenu index="1">
 						<template slot="title">
-							<i class="el-icon-location"></i>
-							<span slot="title">导航一</span>
+							<i class="el-icon-shopping-bag-2"></i>
+							<span slot="title">商品</span>
 						</template>
-						<el-menu-item-group>
-							<span slot="title">分组一</span>
-							<el-menu-item index="1-1">选项1</el-menu-item>
-							<el-menu-item index="1-2">选项2</el-menu-item>
-						</el-menu-item-group>
-						<el-menu-item-group title="分组2"><el-menu-item index="1-3">选项3</el-menu-item></el-menu-item-group>
-						<el-submenu index="1-4">
-							<span slot="title">选项4</span>
-							<el-menu-item index="1-4-1">选项1</el-menu-item>
+
+						<el-submenu index="1-1">
+							<span slot="title">商品管理</span>
+							<el-menu-item index="1-1-1">选项1</el-menu-item>
 						</el-submenu>
+
+						<el-submenu index="1-2">
+							<span slot="title">商品配置</span>
+							<el-menu-item index="1-2-1">商品后台分类</el-menu-item>
+						</el-submenu>
+
+						<el-menu-item index="1-3"><span slot="title">图片库管理</span></el-menu-item>
 					</el-submenu>
+					<!--  -->
+
 					<el-menu-item index="2">
-						<i class="el-icon-menu"></i>
-						<span slot="title">导航二</span>
+						<i class="el-icon-coin"></i>
+						<span slot="title">交易</span>
 					</el-menu-item>
-					<el-menu-item index="3" disabled>
-						<i class="el-icon-document"></i>
-						<span slot="title">导航三</span>
+					<!--  -->
+					<el-menu-item index="3">
+						<i class="el-icon-user"></i>
+						<span slot="title">用户</span>
 					</el-menu-item>
-					<el-menu-item index="4">
-						<i class="el-icon-setting"></i>
-						<span slot="title">导航四</span>
-					</el-menu-item>
+					<!--  -->
+
+					<el-submenu index="4">
+						<template slot="title">
+							<i class="el-icon-s-shop"></i>
+							<span slot="title">门店</span>
+						</template>
+						<el-menu-item index="4-1">
+							<!-- 添加tab标签，然后继续路由 -->
+							<span slot="title" @click="addTab(editableTabsValue, '门店管理', '/user/shop')"><router-link to="/user/shop" class="a-color">门店管理</router-link></span>
+						</el-menu-item>
+					</el-submenu>
+					<!--  -->
+					<el-submenu index="5">
+						<template slot="title">
+							<i class="el-icon-edit"></i>
+							<span slot="title">营销</span>
+						</template>
+						<el-menu-item index="5-1"><span slot="title" @click="addTab(editableTabsValue, '门店管理22', '/user')">门店管理</span></el-menu-item>
+					</el-submenu>
+
+					<!--  -->
 				</el-menu>
 			</el-aside>
 			<!-- 侧边栏 -->
 
 			<el-container>
 				<!-- 头部-->
-				<el-header class="headers">Header</el-header>
+				<el-header class="headers">
+					<div class="hearder-cont">
+						<i class="el-icon-message-solid" style="color: #0000FF;"></i>
+						<span>
+							退出登录
+							<i class="el-icon-s-release" style="color: #0000FF;"></i>
+						</span>
+					</div>
+				</el-header>
 
+				<el-tabs v-model="editableTabsValue" type="card"  @tab-remove="removeTab" @tab-click="tabClick">
+					<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name" :closable="item.name=='1'?false:true"></el-tab-pane>
+				</el-tabs>
 				<!-- 内容 -->
-				<el-main>Main</el-main>
+				<el-main class="con"><router-view></router-view></el-main>
 
 				<!-- 底部 -->
-				<el-footer>Footer</el-footer>
+				<!-- <el-footer>Footer</el-footer> -->
 			</el-container>
 		</el-container>
 	</div>
 </template>
 
 <script>
-import {getcode} from '../../api/index.js'
+import { getcode } from '../../api/index.js';
 export default {
 	data() {
 		return {
-			isCollapse: true,
-			loginsucid: sessionStorage.getItem('token') //登陆成功标准
+			isCollapse: false,
+			loginsucid: sessionStorage.getItem('token'), //登陆成功标准
+			wei: '200px',
+			/* 标签页 */
+			editableTabsValue: '2',
+			editableTabs: [
+				{
+					title: '首页',
+					name: '1',
+					content: '/user'
+				}
+			],
+			tabIndex: 1
 		};
 	},
-	created() {
-		this.test()
-	},
+	created() {},
 	methods: {
 		handleOpen(key, keyPath) {
 			console.log(key, keyPath);
@@ -75,29 +138,101 @@ export default {
 		handleClose(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		/* test */
-		test() {
-			getcode().then(res => {
-				console.log(res.data, 'test');
+		changecollapse() {
+			if (this.isCollapse == true) {
+				console.log(this.isCollapse);
+				this.wei = '50px';
+			} else {
+				this.wei = '200px';
+			}
+		},
+		/* 删除表标签页 */
+		removeTab(targetName) {
+			let tabs = this.editableTabs;
+			let activeName = this.editableTabsValue;
+			if (activeName === targetName) {
+				tabs.forEach((tab, index) => {
+					if (tab.name === targetName) {
+						let nextTab = tabs[index + 1] || tabs[index - 1];
+						if (nextTab) {
+							activeName = nextTab.name;
+						}
+					}
+				});
+			}
+
+			this.editableTabsValue = activeName;
+			this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+			/* 删除后都会转向首页*/
+			this.$router.push('/user');
+		},
+		/* 添加标签页 */
+		addTab(targetName, title, content) {
+			let newTabName = ++this.tabIndex + '';
+			this.editableTabs.push({
+				title: title,
+				name: newTabName,
+				content: content
 			});
+			this.editableTabsValue = newTabName;
+		},
+		/* 点击事件 */
+		tabClick(tab) {
+			/* 实现tab标签的路由跳转 */
+			let path = parseInt(tab.name);
+			for (let i of this.editableTabs) {
+				if (i.name == path) {
+					this.$router.push(i.content);
+				}
+			}
 		}
 	}
 };
 </script>
 
 <style>
-.full {
+.user-index .a-color{
+	color: #000;
+}
+.user-index .full {
 	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	top: 0;
-}
-.asside {
 	background-color: #f0f0f0;
 }
-.headers {
-	background-color: dodgerblue;
-	color: #fff;
+.user-index .asside {
+	background-color: #ffffff;
+}
+.user-index .headers {
+	margin-left: 3%;
+	width: 97%;
+	height: 45px !important;
+	background-color: #ffffff;
+	margin-bottom: 10px;
+	border-radius: 0 0 0 30px;
+}
+.user-index .con {
+	margin-top: -15px;
+	margin-left: 30px;
+
+	background-color: #ffffff;
+}
+
+.user-index .el-menu-item {
+}
+.headers .hearder-cont {
+	float: right;
+}
+.user-index .el-tabs__item {
+	margin-right: 10px;
+	background-color: #fff;
+	border-radius: 10px 10px 0 0;
+	border: none;
+}
+/* is-top */
+.user-index .el-tabs__nav {
+	margin-left: 30px;
 }
 </style>

@@ -1,0 +1,45 @@
+
+/* 头部收索框 */
+.shop .el-input__inner{
+	width: 200px;
+}
+.shop{
+	
+	
+}
+.shop .hearder {
+	display: flex;
+	background-color: #FFFFFF;
+	height: 80px;
+   
+	flex-wrap: wrap;
+}
+.shop .hearder div{
+	
+	display: flex;
+	align-items: center;
+}
+.shop .hearder div>span{
+	width: 90px;
+	text-align: center;
+	
+}
+
+.shop .hearder .cx {
+    padding-left: 150px;
+	margin-left: 80px;
+	width: 300px;
+	
+}
+
+.shop .hearder .cx .link{
+	width: 60px;
+	margin-right: 5px;
+}
+
+
+
+.shop .content {
+	margin-top: 10px;
+	flex: 1;
+}
