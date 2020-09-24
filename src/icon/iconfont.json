@@ -13,6 +13,13 @@
       "unicode_decimal": 58945
     },
     {
+      "icon_id": "5880283",
+      "name": "营销",
+      "font_class": "yingxiao",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    },
+    {
       "icon_id": "15838529",
       "name": "sign-out",
       "font_class": "sign-out",

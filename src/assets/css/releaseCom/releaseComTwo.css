@@ -1,0 +1,46 @@
+/* 添加活动弄商品第二步css */
+
+/* 搜索内容 */
+.releaseComTwo{
+	margin-left: 100px;
+}
+
+
+.releaseComTwo .title p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 2px;
+	border-left: 5px solid #3f78f6;
+}
+.releaseComTwo .serach{
+	display: flex;
+	align-items: center;
+}
+.releaseComTwo .serach .el-input__inner{
+	width: 150px;
+}
+.releaseComTwo .serach .box{
+	display: flex;
+}
+.releaseComTwo .serach .box span{
+	width: 120px;
+	line-height: 40px;
+}
+.releaseComTwo .serach .boxts .el-button--primary{
+	height: 30px;
+	line-height: 0!important;
+	margin-left: 20px;
+} 
+
+/* 添加与删除 */
+.releaseComTwo  .btn .el-button span{
+	margin-top: 10px;
+	padding: 5px;
+	
+	
+} 
+
+.releaseComTwo  .btn .el-button{
+	margin-top: 10px;
+	
+} 

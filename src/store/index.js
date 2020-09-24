@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import Merchandise from './merchandise/index.js'//导入营销模块
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,5 +15,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+	  Merchandise
   }
 })

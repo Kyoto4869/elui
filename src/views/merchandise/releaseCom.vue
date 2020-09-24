@@ -11,26 +11,31 @@
 			</el-steps>
 		</div>
 		
-		<step-one></step-one>
+		
+		<!-- 第一步 -->
+		<step-one v-if="step==1" :step.sync="step"></step-one>
 		
 		
+		<!-- 第二步 -->
+		
+		<step-two v-if="step==2" :step.sync="step"></step-two>
 		
 	</div>
 </template>
 
 <script>
 	
-import StepOne from '../../components/merchandise/releaseComOne.vue'	
-	
+import StepOne from '../../components/merchandise/releaseComOne.vue'	//发布商品第一步
+import StepTwo from '../../components/merchandise/releaseComTwo.vue'    //发布商品第二步
 export default {
 	data() {
 		return {
-			step: 1,
-			radio: '1'
+			step: 2,
+			
 		};
 	},
 	components:{
-		StepOne
+		StepOne,StepTwo
 		
 	}
 	

@@ -81,8 +81,8 @@
 				
 					<el-submenu index="5">
 						<template slot="title">
-							<i class="el-icon-s-shop"></i>
-							<span slot="title">营销</span>
+							<i class="iconfont icon-yingxiao"></i>
+							<span slot="title" style="margin-left: 5px;">营销</span>
 						</template>
 						<el-menu-item index="6-1">
 							<!-- 添加tab标签，然后继续路由 -->
@@ -115,7 +115,7 @@
 						
 					</div>
 				</el-header>
-
+                   <!-- d动态创建tab-->
 				<el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" @tab-click="tabClick">
 					<el-tab-pane
 						v-for="(item, index) in editableTabs"
