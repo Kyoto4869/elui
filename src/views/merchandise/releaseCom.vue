@@ -20,6 +20,8 @@
 		
 		<step-two v-if="step==2" :step.sync="step"></step-two>
 		
+		<!-- 第三步，结束步骤 -->
+		<step-end v-if="step==3" ></step-end>
 	</div>
 </template>
 
@@ -27,15 +29,16 @@
 	
 import StepOne from '../../components/merchandise/releaseComOne.vue'	//发布商品第一步
 import StepTwo from '../../components/merchandise/releaseComTwo.vue'    //发布商品第二步
+import  StepEnd from '../../components/merchandise/releaseComEnd.vue'  //结束步骤
 export default {
 	data() {
 		return {
-			step: 2,
+			step: 1,
 			
 		};
 	},
 	components:{
-		StepOne,StepTwo
+		StepOne,StepTwo,StepEnd
 		
 	}
 	

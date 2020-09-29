@@ -71,7 +71,7 @@ export default {
 		getadminlist() {
 			getadmin()
 				.then(res => {
-					console.log(res.data.listtop);
+					// console.log(res.data.listtop);
 					this.listadmin = res.data;
 				})
 				.catch(err => {

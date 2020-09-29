@@ -6,6 +6,7 @@ import User from '../views/user/index.vue'
 import Shop from '../views/shop/index.vue'
 import Admin from '../views/user/admin/index.vue'
 import ReleaseCom from '../views/merchandise/releaseCom.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,42 +34,59 @@ const routes = [
 		name: 'Login',
 		component: Login
 	},
-	{   
+	{
 		// 用户登录后的页面
 		path: '/user',
 		name: 'User',
 		component: User,
-		children:[
-			{   
+		children: [{
 				/* 商店页面 */
-				path:'shop',
-				name:"Shop",
-				component:Shop
-			},
-			{   
-				/* 首页 */
-				path:'admin',
-				component:Admin,
-				name:'Admin'
+				path: 'shop',
+				name: "Shop",
+				component: Shop
 			},
 			{
-				/* 发布商品 */
-				path:'releasecom',
-				component:ReleaseCom,
-				name:'ReleaseCom'
+				/* 首页 */
+				path: 'admin',
+				component: Admin,
+				name: 'Admin'
 			},
-			
-			
-			
-			
-			
-			
+			{
+				/* 发布商品活动 */
+				path: 'releasecom',
+				component: ReleaseCom,
+				name: 'ReleaseCom'
+			},
+			{
+				/* 商品活动列表 */
+				path: 'listactivities',
+				name: "ListActivities",
+				component: () => import( /* webpackChunkName: "about" */ '../views/merchandise/listActivities.vue')
+			},
+			{
+				/* 交易列表 */
+				path: 'transaction',
+				name: "Transaction",
+				component: () => import( /* webpackChunkName: "about" */ '../views/transaction/index.vue')
+			},
+			{
+				/* 用户列表 */
+				path: 'userlist',
+				name: "UserList",
+				component: () => import( /* webpackChunkName: "about" */ '../views/user/admin/user.vue')
+			}
+
+
+
+
+
+
 		]
-		
-		
-		
+
+
+
 	},
-	
+
 
 ]
 

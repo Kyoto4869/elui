@@ -1,0 +1,29 @@
+.transaction .search-top .cont-top{
+	margin-top: 10px;
+}
+.transaction .search-top .cont-top-box .el-input__inner{
+	width:150px;
+}
+.transaction .search-top .cont-top-box{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+.transaction .search-top .cont-top-box>div:first-child{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 700px;
+}
+.transaction .search-top .cont-top-box>div:first-child>span
+{
+	width: 300px;
+	
+}
+
+.cont-top-box-two{
+	width: 900px!important;
+}
+.transaction .transaction-cont{
+	margin-top: 10px;
+}

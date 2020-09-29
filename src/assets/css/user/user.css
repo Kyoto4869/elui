@@ -1,0 +1,22 @@
+.user .search .el-input__inner{
+	width: 120px;
+}
+.user .search {
+	display: flex;
+	align-items: center;
+}
+.user .search div{
+	display: flex;
+	align-items: center;
+	
+}
+.user .search div>span{
+	width: 60px;
+}
+.user .search .conten .link{
+	margin-left: 220px;
+
+}
+.user .operation {
+	margin-top: 10px;
+}

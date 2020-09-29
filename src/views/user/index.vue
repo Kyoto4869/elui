@@ -54,15 +54,31 @@
 					</el-submenu>
 					<!--  -->
 
-					<el-menu-item index="2">
-						<i class="el-icon-coin"></i>
-						<span slot="title">交易</span>
-					</el-menu-item>
+					<el-submenu index="2">
+						<template slot="title">
+							<i class="el-icon-coin"></i>
+							<span slot="title">交易</span>
+						</template>
+						<el-menu-item index="2-1">
+							<!-- 添加tab标签，然后继续路由 -->
+							<span slot="title" @click="addTab(editableTabsValue, '订单列表', '/user/transaction')">
+								<router-link to="/user/transaction" class="a-color">订单列表</router-link>
+							</span>
+						</el-menu-item>
+					</el-submenu>
 					<!--  -->
-					<el-menu-item index="3">
-						<i class="el-icon-user"></i>
-						<span slot="title">用户</span>
-					</el-menu-item>
+					<el-submenu index="3">
+						<template slot="title">
+							<i class="el-icon-user"></i>
+							<span slot="title">用户</span>
+						</template>
+						<el-menu-item index="3-1">
+							<!-- 添加tab标签，然后继续路由 -->
+							<span slot="title" @click="addTab(editableTabsValue, '用户管理', '/user/userlist')">
+								<router-link to="/user/userlist" class="a-color">用户管理</router-link>
+							</span>
+						</el-menu-item>
+					</el-submenu>
 					<!--  -->
 
 					<el-submenu index="4">
@@ -88,6 +104,12 @@
 							<!-- 添加tab标签，然后继续路由 -->
 							<span slot="title" @click="addTab(editableTabsValue, '发布商品', '/user/releasecom')">
 								<router-link to="/user/releasecom" class="a-color">创建活动</router-link>
+							</span>
+						</el-menu-item>
+						<el-menu-item index="6-2">
+							<!-- 添加tab标签，然后继续路由 -->
+							<span slot="title" @click="addTab(editableTabsValue, '活动列表', '/user/listactivities')">
+								<router-link to="/user/listactivities" class="a-color">活动列表</router-link>
 							</span>
 						</el-menu-item>
 					</el-submenu>

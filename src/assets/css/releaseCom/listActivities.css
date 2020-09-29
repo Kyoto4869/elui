@@ -1,0 +1,34 @@
+
+/* 头部 */
+.listActivities .topone .el-input__inner {
+	
+	width: 200px;
+	
+	
+}
+.listActivities .topone>div{
+	display: flex;
+	align-items: center;
+}
+.listActivities .topone>div>span{
+	width: 90px;
+}
+.listActivities .topone{
+	display: flex;
+	margin-bottom: 30px;
+}
+
+
+.listActivities .toptow{
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.listActivities .el-dia-listactivity{
+	height: 350px;
+	width: 100%;
+}
+.listActivities .el-dia-listactivity>p{
+	border-left: 5px solid #0000FF;
+	padding-left: 5px;
+}

@@ -1,6 +1,6 @@
 <template>
 	<!-- 发布商品第一步 -->
-	<div>
+	<div v-if="$store.state.Adminid!=null?true:$router.push('/login')">
 		<!-- 基本信息 -->
 
 		<div class="information admin">
@@ -16,9 +16,9 @@
 				<div class="box box-cont">
 					<span>活动时间：</span>
 					<template>
-						<el-date-picker v-model="activity.starttime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+						<el-date-picker v-model="activity.starttime" type="datetime" placeholder="选择日期时间"  value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 						<span>至</span>
-						<el-date-picker v-model="activity.endtime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+						<el-date-picker v-model="activity.endtime" type="datetime" placeholder="选择日期时间"  value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 					</template>
 				</div>
 
@@ -42,7 +42,7 @@
 				<div class="box box-cont">
 					<span>活动时间预告：</span>
 					<template>
-						<el-date-picker v-model="activity.noticetime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+						<el-date-picker v-model="activity.noticetime" type="datetime" placeholder="选择日期时间"  value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 					</template>
 				</div>
 
@@ -83,7 +83,7 @@
 				<div class="box">
 					<span>提货时间：</span>
 					<template>
-						<el-date-picker v-model="activity.pickuptime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+						<el-date-picker v-model="activity.pickuptime" type="datetime" placeholder="选择日期时间"  value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 					</template>
 				</div>
 
@@ -98,9 +98,10 @@ export default {
 	data() {
 		return {
 			activity: {
+				id:"",
 				name: '', //活动名称
-				starttime: '',
-				endtime: '',
+				starttime: '', //开始时间
+				endtime: '', //结束时间
 				slogan: '', //广告语
 				type: '', //类型
 				noticetime: '', //活动时间预告
@@ -112,24 +113,42 @@ export default {
 			}
 		};
 	},
+	created() {
+		this.getdataback();
+	},
 	methods: {
+		getdataback() {
+			/* 返回后获取数据 */
+
+			if (this.$store.state.Merchandise.nextStepOne.length == 0) {
+				console.log('数据为空');
+			} else {
+				this.activity = this.$store.state.Merchandise.nextStepOne;
+			}
+		},
 		nextStep() {
 			/* 第一步提交数据 */
 
 			let con = true;
+			
 			for (let i in this.activity) {
 				if (this.activity[i] == '') {
-					con = false;
+					if (this.activity[i] == this.activity.noticetime) {
+						con = true;
+					}
 				}
 			}
 			if (this.activity.pickuptime == '') {
 				con = false;
 			}
+
 			if (con == true) {
-				this.$store.state.Merchandise.nextStepOne="";//先清空数据
-				this.$store.state.Merchandise.nextStepOne=this.activity;//载入第一步的数据
+				this.$store.state.Merchandise.nextStepOne = ''; //先清空数据
+				/* 参数活动编号 */
+				let id=parseInt(Math.random()*10000+1);
+				this.$store.state.Merchandise.nextStepOne = {...this.activity,id}; //载入第一步的数据
 				// console.log(this.$store.state.Merchandise.nextStepOne)
-				this.$emit('update:step', 2);//发送完成的信息
+				this.$emit('update:step', 2); //发送完成的信息
 			} else {
 				this.$notify({
 					title: '警告',
